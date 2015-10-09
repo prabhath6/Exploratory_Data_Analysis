@@ -1,3 +1,4 @@
+library(ggplot2)
 # Assignment 1
 
 # Read the data from csv file into dataFrame.
@@ -27,15 +28,18 @@ for (val in c)
 
 # Question 2.a
 pct_missing_values <- c()
+missing_values <- c()
 
 for (val in c)
 {
   each <- table(myData[val])
   if (!is.na(each['?'])) {
     pct <- (each['?']/length(myData[[val]])) * 100
+    missing_values <- c(missing_values, each['?'])
     pct_missing_values <- c(pct_missing_values, pct)
   } else {
     pct_missing_values <- c(pct_missing_values, 0)
+    missing_values <- c(missing_values, 0)
   }
 }
 
