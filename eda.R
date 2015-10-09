@@ -10,7 +10,6 @@ c <- (colnames(myData))
 
 for (val in c)
 {
-  print (length(myData[[val]]))
   print (c(val, class(myData[[val]])))
 }
 
@@ -56,19 +55,44 @@ for (i in 1:length(myData[['sex']])){
       missing_data <- c(missing_data, 0)
   }  
 }
-qplot(final, geom="histogram")
+hist_plot <- qplot(final, geom="histogram")
+#print (hist_plot)
 
 
 # Question 3 .a
-# for age
-# qplot(myData$age, geom='histogram')
+#for age
+qplot(myData$age, geom='histogram')
 # for number of hrs
-# qplot(myData$hrs_per_week, geom='histogram')
+qplot(myData$hrs_per_week, geom='histogram')
 # for income
-# qplot(myData$income, geom='histogram')
+qplot(myData$income, geom='histogram')
 
 # Question 3.b
 #ggplot() + aes(myData$age)+ geom_histogram(binwidth=1, colour="black", fill="white")
+qplot(age, data=myData, geom="histogram", binwidth = 5) + facet_grid(income ~ .)
+qplot(hrs_per_week, data=myData, geom="histogram", binwidth = 5, xlim=c(1,100)) + facet_grid(income ~ .)
+
+# Question 3.c
+# age and income
+ggplot(data=myData, aes(x=income, y=age)) + geom_boxplot()
+# hrs_per_week and income
+ggplot(data=myData, aes(x=income, y=hrs_per_week)) + geom_boxplot()
+
+# Question 4.a
+# Plotting of each categorical feature
+qplot(work, data=myData, geom="bar")
+qplot(edu, data=myData, geom="bar")
+qplot(marital, data=myData, geom="bar")
+qplot(occupation, data=myData, geom="bar")
+qplot(race, data=myData, geom="bar")
+
+# Question 4.b
+qplot(work, data=myData, geom="bar") + facet_grid(income ~ .)
+qplot(edu, data=myData, geom="bar") + facet_grid(income ~ .)
+qplot(marital, data=myData, geom="bar") + facet_grid(income ~ .)
+qplot(occupation, data=myData, geom="bar") + facet_grid(income ~ .)
+qplot(race, data=myData, geom="bar") + facet_grid(income ~ .)
 
 # Question 5
-ggplot(myData, aes(x=age, y=income)) +geom_point() + geom_jitter(position = position_jitter(width = 5))
+ggplot(myData, aes(x=age, y=hrs_per_week)) + geom_point(shape=3, color="blue", alpha=0.2)
+correlation <- cov(myData$age, myData$hrs_per_week)
