@@ -10,8 +10,8 @@ c <- (colnames(myData))
 
 for (val in c)
 {
-  #print (length(myData[[val]]))
-  #print (c(val, class(myData[[val]])))
+  print (length(myData[[val]]))
+  print (c(val, class(myData[[val]])))
 }
 
 # Question 1
@@ -44,3 +44,31 @@ for (val in c)
 }
 
 # Question 2.b
+missing_data <- c()
+for (i in 1:length(myData[['sex']])){
+  if ((myData[i,2] == '?') & (myData[i,5] == '?')){
+    missing_data <- c(missing_data, 2)
+  }else if ((myData[i,2] != '?') & (myData[i,5] == '?')) {
+    missing_data <- c(missing_data, 1)
+  }else if ((myData[i,2] == '?') & (myData[i,5] != '?')) {
+    missing_data <- c(missing_data, 1)
+  }else {
+      missing_data <- c(missing_data, 0)
+  }  
+}
+qplot(final, geom="histogram")
+
+
+# Question 3 .a
+# for age
+# qplot(myData$age, geom='histogram')
+# for number of hrs
+# qplot(myData$hrs_per_week, geom='histogram')
+# for income
+# qplot(myData$income, geom='histogram')
+
+# Question 3.b
+#ggplot() + aes(myData$age)+ geom_histogram(binwidth=1, colour="black", fill="white")
+
+# Question 5
+ggplot(myData, aes(x=age, y=income)) +geom_point() + geom_jitter(position = position_jitter(width = 5))
