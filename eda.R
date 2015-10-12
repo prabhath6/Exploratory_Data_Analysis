@@ -7,18 +7,6 @@ myData <- read.csv("censusData.csv")
 # Column names and length of each column.
 c <- (colnames(myData))
 
-# Question 1
-
-"age: type = Integer, Ratio-scaled Attribute, This is a ratio scaled attribute with an inherit zero point and we can talk one person's age as multiple of others."
-"work: type = factor, Nominal Attribute, This is nominal because it is names of work they do it relating to names."
-"edu: type = factor, Ordinal Attribute, This is regarding the education level which has order but the magnitude between the levels is unkown."
-"marital: type = factor, Nominal Attribute, This is nominal because it is relating to names of their marital status."
-"occupation: type = factor, Nominal Attribute, This is nominal because it is names of work they do it relating to names."
-"race: type = factor, Nominal Attribute, This is nominal because it is relating to names of their races."
-"sex: type = factor, Binary(symmetric) Attribute, Binary attributes are only with two categories, here male and female have equal weights."
-"hrs_per_week: type = integer, Ratio-scaled Attribute,"
-"income: type = factor, Ratio-scaled Attribute, Ratio-scaled Attribute, This is a ratio scaled attribute with an inherit zero point and we can talk one person's salary as multiple of others."
-
 # Question 2.a
 pct_missing_values <- c()
 missing_values <- c()
@@ -35,6 +23,10 @@ for (val in c)
     missing_values <- c(missing_values, 0)
   }
 }
+
+names(pct_missing_values) <- c
+
+print (pct_missing_values)
 
 # Question 2.b
 missing_data <- c()
@@ -56,10 +48,11 @@ hist_plot <- qplot(final, geom="histogram",
                    xlab="Missing values",
                    ylab="Count")
 
-#print (hist_plot)
+print (hist_plot)
 
 
 # Question 3 .a
+
 #for age
 age_hist <- ggplot(myData, aes(x=age)) + geom_histogram(binwidth=5, 
                                             alpha=0.7, 
@@ -68,7 +61,8 @@ age_hist <- ggplot(myData, aes(x=age)) + geom_histogram(binwidth=5,
                                             ggtitle("Histogram for Age") +
                                             xlab("Age")+
                                             ylab("Count")
-# print (age_hist)
+print (age_hist)
+
 # for number of hrs
 hours_per_week_hist <- ggplot(myData, aes(x=hrs_per_week)) + geom_histogram(binwidth=8, 
                                             alpha=0.7, 
@@ -77,7 +71,7 @@ hours_per_week_hist <- ggplot(myData, aes(x=hrs_per_week)) + geom_histogram(binw
                                             ggtitle("Histogram for hrs_worked_per_week") +
                                             xlab("Hours per week")+
                                             ylab("Count")
-# print (hours_per_week_hist)
+print (hours_per_week_hist)
 
 # for income
 income_hist = ggplot(myData, aes(x=income)) + geom_histogram(alpha=0.7, 
@@ -87,7 +81,7 @@ income_hist = ggplot(myData, aes(x=income)) + geom_histogram(alpha=0.7,
                                                xlab("Income")+
                                                ylab("Count")
 
-# print (income_hist)
+print (income_hist)
 
 # Question 3.b
 age_income <- ggplot(myData, aes(x=age)) + geom_histogram(binwidth=5, 
@@ -98,7 +92,7 @@ age_income <- ggplot(myData, aes(x=age)) + geom_histogram(binwidth=5,
                                             xlab("Age")+
                                             ylab("Count")+ 
                                             facet_grid(income ~ .)
-# print ("age_income")
+print (age_income)
 
 hrs_per_week_income <- ggplot(myData, aes(x=hrs_per_week)) + geom_histogram(binwidth=10, 
                                             alpha=0.7, 
@@ -108,15 +102,16 @@ hrs_per_week_income <- ggplot(myData, aes(x=hrs_per_week)) + geom_histogram(binw
                                             xlab("Hours worked per week")+
                                             ylab("Count")+ 
                                             facet_grid(income ~ .)
-# print (hrs_per_week_income)
+print (hrs_per_week_income)
 
 # Question 3.c
+
 # age and income
 age_income_boxplot <- ggplot(data=myData, aes(x=income, y=age)) + geom_boxplot(alpha=0.5,
                                                          fill="yellow",
                                                          col="red")+
                                                          ggtitle("Box plots of Income and Age")
-# print (age_income_boxplot)
+print (age_income_boxplot)
 
 # hrs_per_week and income
 hrs_per_week_income_boxplot <- ggplot(data=myData, aes(x=income, y=hrs_per_week)) + geom_boxplot(alpha=0.5,
@@ -124,11 +119,12 @@ hrs_per_week_income_boxplot <- ggplot(data=myData, aes(x=income, y=hrs_per_week)
                                                                   col="red")+
                                                                   ggtitle("Box plots of Income and Hours worked per week")
 
-# print (hrs_per_week_income_boxplot)
+print (hrs_per_week_income_boxplot)
 
 # Question 4.a
+
 # Plotting of each categorical feature
-wark_bar_plot <- ggplot(myData, aes(x=work)) + geom_bar(binwidth=10, 
+work_bar_plot <- ggplot(myData, aes(x=work)) + geom_bar(binwidth=10, 
                                             alpha=0.7, 
                                             fill="yellow", 
                                             col="red")+
@@ -136,7 +132,7 @@ wark_bar_plot <- ggplot(myData, aes(x=work)) + geom_bar(binwidth=10,
                                             xlab("Work")+
                                             ylab("Count")
 
-# print (wark_bar_plot)
+print (work_bar_plot)
 
 education_bar <- ggplot(myData, aes(x=edu)) + geom_bar(binwidth=10, 
                                        alpha=0.7, 
@@ -146,7 +142,7 @@ education_bar <- ggplot(myData, aes(x=edu)) + geom_bar(binwidth=10,
                                        xlab("Education")+
                                        ylab("Count")
 
-# print (education_bar)
+print (education_bar)
 
 marital_barplot <- ggplot(myData, aes(x=marital)) + geom_bar(binwidth=10, 
                                       alpha=0.7, 
@@ -156,7 +152,7 @@ marital_barplot <- ggplot(myData, aes(x=marital)) + geom_bar(binwidth=10,
                                       xlab("Marital")+
                                       ylab("Count")
 
-# print (marital_barplot)
+print (marital_barplot)
 
 occupation_barplot <- ggplot(myData, aes(x=occupation)) + geom_bar(binwidth=10, 
                                           alpha=0.7, 
@@ -167,7 +163,7 @@ occupation_barplot <- ggplot(myData, aes(x=occupation)) + geom_bar(binwidth=10,
                                           ylab("Count")
 
 
-# print (occupation_barplot)
+print (occupation_barplot)
 
 race_barplot <- ggplot(myData, aes(x=race)) + geom_bar(binwidth=10, 
                                           alpha=0.7, 
@@ -177,7 +173,7 @@ race_barplot <- ggplot(myData, aes(x=race)) + geom_bar(binwidth=10,
                                           xlab("Race")+
                                           ylab("Count")
 
-# print (race_barplot)
+print (race_barplot)
 
 # Question 4.b
 work_income <- ggplot(myData, aes(x=work)) + geom_bar(binwidth=10, 
@@ -188,7 +184,7 @@ work_income <- ggplot(myData, aes(x=work)) + geom_bar(binwidth=10,
                                        xlab("Work")+
                                        ylab("Count")  + facet_grid(income ~ .)
 
-#print (work_income)
+print (work_income)
 
 edu_income <- ggplot(myData, aes(x=edu)) + geom_bar(binwidth=10, 
                                       alpha=0.7, 
@@ -198,7 +194,7 @@ edu_income <- ggplot(myData, aes(x=edu)) + geom_bar(binwidth=10,
                                       xlab("Education")+
                                       ylab("Count")  + facet_grid(income ~ .)
 
-# print (edu_income)
+print (edu_income)
 
 marital_income <- ggplot(myData, aes(x=marital)) + geom_bar(binwidth=10, 
                                           alpha=0.7, 
@@ -208,7 +204,7 @@ marital_income <- ggplot(myData, aes(x=marital)) + geom_bar(binwidth=10,
                                           xlab("Marital")+
                                           ylab("Count")  + facet_grid(income ~ .)
 
-# print (marital_income)
+print (marital_income)
 
 occupation_income <- ggplot(myData, aes(x=occupation)) + geom_bar(binwidth=10, 
                                              alpha=0.7, 
@@ -218,7 +214,7 @@ occupation_income <- ggplot(myData, aes(x=occupation)) + geom_bar(binwidth=10,
                                              xlab("Occupation")+
                                              ylab("Count")  + facet_grid(income ~ .)
 
-# print (occupation_income)
+print (occupation_income)
 
 race_income <- ggplot(myData, aes(x=race)) + geom_bar(binwidth=10, 
                                        alpha=0.7, 
@@ -228,19 +224,21 @@ race_income <- ggplot(myData, aes(x=race)) + geom_bar(binwidth=10,
                                        xlab("Race")+
                                        ylab("Count") + facet_grid(income ~ .)
 
-# print (race_income)
+print (race_income)
 
 # Question 5
-age_hres_per_week_scatter <- ggplot(myData, aes(x=age, y=hrs_per_week)) + geom_point(shape=3, 
+age_hres_per_week_scatter <- ggplot(myData, aes(x=age, y=hrs_per_week)) + geom_point(shape=1, 
                                                         color="blue", 
-                                                        alpha=0.2)+
+                                                        alpha=0.1)+
                                                         ggtitle("Age vs hrs_per_week")+
                                                         xlab("Age")+
                                                         ylab("Hours per week")
-# print (age_hres_per_week_scatter)
+
+print (age_hres_per_week_scatter)
 correlation <- cor(myData$age, myData$hrs_per_week)
 
 # Question 6
+
 # Correlatio plot between age and hrs_per_week
 correlation_matrix <- cor(data.frame(myData$age, myData$hrs_per_week))
 corrplot(correlation_matrix)
