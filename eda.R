@@ -1,4 +1,5 @@
 library(ggplot2)
+library(corrplot)
 # Assignment 1
 
 # Read the data from csv file into dataFrame.
@@ -227,15 +228,17 @@ race_income <- ggplot(myData, aes(x=race)) + geom_bar(binwidth=10,
 print (race_income)
 
 # Question 5
-age_hres_per_week_scatter <- ggplot(myData, aes(x=age, y=hrs_per_week)) + geom_point(shape=1, 
+age_hrs_per_week_scatter <- ggplot(myData, aes(x=age, y=hrs_per_week)) + geom_point(shape=19, 
                                                         color="blue", 
                                                         alpha=0.1)+
                                                         ggtitle("Age vs hrs_per_week")+
                                                         xlab("Age")+
-                                                        ylab("Hours per week")
+                                                        ylab("Hours per week")+
+                                                        geom_point(position = position_jitter(w = 0.01, h = 0.01))
 
-print (age_hres_per_week_scatter)
+print (age_hrs_per_week_scatter)
 correlation <- cor(myData$age, myData$hrs_per_week)
+print(correlation)
 
 # Question 6
 
