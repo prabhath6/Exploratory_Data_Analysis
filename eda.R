@@ -43,7 +43,7 @@ for (i in 1:length(myData[['sex']])){
   }  
 }
 
-hist_plot <- qplot(final, geom="histogram", 
+hist_plot <- qplot(missing_data, geom="histogram", 
                    binwidth=0.1, 
                    main="Missing values per data point",
                    xlab="Missing values",
